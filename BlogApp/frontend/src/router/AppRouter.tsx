@@ -4,6 +4,7 @@ import Login from "../features/auth/Login";
 import Signup from "../features/auth/Signup";
 import Blogs from "../features/blog/Blogs";
 import ProtectedRoute from "../components/ProtectedRoute";
+import Auth from "../features/auth/Auth";
 
 const AppRouter = () => {
   const  router = createBrowserRouter([
@@ -11,19 +12,26 @@ const AppRouter = () => {
       path: "/",
       element: <App />,
      children:[
+
       {
-        path:"/login",
-        element:<Login/>
+        path:"auth",
+        element:<Auth/>,
+        children:[
+          {
+            path:"login",
+            element:<Login/>
+          },
+            {
+                path:"signup",
+                element:<Signup/>,
+                
+            },
+        ]
       },
-        {
-            path:"/signup",
-            element:<Signup/>,
-            
-        },
         {
           element: <ProtectedRoute />,
           children:[
-            {path:"/blogs",element:<Blogs/>}
+            {path:"blogs",element:<Blogs/>}
           ] 
         },
 
